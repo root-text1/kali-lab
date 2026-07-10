@@ -33,28 +33,42 @@ Internet access for updates
 This project includes screenshots, configuration files, and step‑by‑step documentation for every component.
 
 - Network Architecture
-                   ┌──────────────────────────┐
-                   │   Windows 11 Client       │
-                   │     IP: 10.0.0.175        │
-                   │  - Browser                │
-                   │  - Thunderbird (IMAP/SMTP)│
-                   └──────────────┬───────────┘
-                                  │
-                        VMware Bridged Network
-                                  │
-                   ┌──────────────┴───────────┐
-                   │     Kali Linux Server     │
-                   │       IP: 10.0.0.151      │
-                   │  - Apache Web Server      │
-                   │  - Postfix SMTP           │
-                   │  - Dovecot IMAP/POP3      │
-                   │  - Git/GitHub tools       │
-                   └──────────────────────────┘
+                        ┌──────────────────────────┐
+                        │   Physical Network (WAN) │
+                        └──────────────┬───────────┘
+                                       │
+                              VMware Bridged Mode
+                                       │
+                        ┌──────────────┴───────────┐
+                        │        pfSense VM         │
+                        │   WAN: DHCP (bridged)     │
+                        │   LAN: 10.0.0.1/24        │
+                        │   DHCP + DNS + Firewall   │
+                        └──────────────┬───────────┘
+                                       │
+                     ┌─────────────────┼──────────────────┐
+                     │                 │                  │
+        ┌────────────┴──────────┐ ┌────┴───────────┐ ┌────┴───────────┐
+        │   Kali Linux Server    │ │ Windows 11 VM   │ │ Future VMs      │
+        │     10.0.0.151         │ │    10.0.0.175   │ │ (Ubuntu, AD, etc)│
+        │ - Apache Web Server    │ │ - Thunderbird   │ │                 │
+        │ - Postfix SMTP         │ │ - Browser       │ │                 │
+        │ - Dovecot IMAP/POP3    │ │ - Testing tools │ │                 │
+        └────────────────────────┘ └─────────────────┘ └─────────────────┘
+
 📁 Repository Structure
 kali-lab/
 │
 ├── README.md
 │
+├── pfSense/
+│   ├── installation.md
+│   ├── network-setup.md
+│   ├── dhcp-config.md
+│   ├── firewall-rules.md
+│   ├── nat-config.md
+│   ├── testing.md
+│   └── screenshots/
 ├── webserver/
 │   ├── apache-installation.md
 │   ├── apache-config.md
@@ -133,14 +147,16 @@ GitHub workflow > screenshots
 
 🎯 Skills Demonstrated
 This project highlights real-world IT skills such as (and not limited to):
-Linux administration
-Service configuration
-Email protocols (SMTP, IMAP, POP3)
-Network troubleshooting
-Virtualization
+Linux server administration
+Web server configuration (Apache)
+Email server configuration (Postfix + Dovecot)
+pfSense firewall administration
+DHCP, DNS, NAT, firewall rules
+VMware networking (bridged, multi‑NIC)
 Git/GitHub workflow
-Documentation & organization
-Problem-solving
+Documentation & architecture design
+Troubleshooting
+Network security fundamentals
 
 These are core competencies for:
 System Administrator
