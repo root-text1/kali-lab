@@ -12,8 +12,7 @@ Troubleshooting
 
 This project serves as a professional reference and portfolio piece for system administration, cybersecurity, and IT support roles.
 
-- Project Overview
-This lab simulates a small enterprise environment using virtual machines:
+Project Overview : This lab simulates a small enterprise environment using virtual machines.
 --Kali Linux Server (10.0.0.151)
 Apache Web Server
 Postfix SMTP Server
